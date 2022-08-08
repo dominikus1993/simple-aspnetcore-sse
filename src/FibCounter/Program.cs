@@ -40,11 +40,13 @@ app.MapServerSentEvents<FibServerSentEvents>("/sse", new ServerSentEventsOptions
     {
         response.Headers.Append("Cache-Control", "no-cache");
         response.Headers.Append("X-Accel-Buffering", "no");
+        response.Headers.ContentType = "text/event-stream; charset=utf-8";
     }
 });
 var webSocketOptions = new WebSocketOptions
 {
-    KeepAliveInterval = TimeSpan.FromMinutes(2)
+    KeepAliveInterval = TimeSpan.FromMinutes(2),
+    AllowedOrigins = { "*" }
 };
 app.UseWebSockets(webSocketOptions);
 
@@ -68,11 +70,11 @@ app.Run();
 static async Task Echo(WebSocket webSocket, CancellationToken cancellationToken)
 {
     long conuter = 1;
-    while (webSocket.State == WebSocketState.Open)
+    while (!webSocket.CloseStatus.HasValue)
     {
         var json = JsonSerializer.SerializeToUtf8Bytes(new FibResponse(conuter));
         await webSocket.SendAsync(json, WebSocketMessageType.Text, true, cancellationToken);
-        await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+        await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
         conuter = conuter + 1;
     }
 
