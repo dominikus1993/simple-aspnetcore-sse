@@ -2,6 +2,6 @@
 
 services:
   app:
-    image: basket
+    image: fibcounter
     ports:
       - 5005:80

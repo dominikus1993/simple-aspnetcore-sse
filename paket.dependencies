@@ -2,18 +2,5 @@ source https://api.nuget.org/v3/index.json
 storage none
 framework: net6.0
 
-nuget LanguageExt.Core
-nuget Microsoft.AspNetCore.Authentication.JwtBearer
-nuget System.Text.Json
+nuget Lib.AspNetCore.ServerSentEvents
 nuget Swashbuckle.AspNetCore
-nuget FluentValidation
-nuget FluentValidation.AspNetCore
-nuget AutoFixture
-nuget FluentAssertions
-nuget xunit
-nuget xunit.runner.visualstudio
-nuget Moq
-nuget Microsoft.NET.Test.Sdk
-nuget coverlet.collector
-nuget Testcontainers 
-nuget Alba
