@@ -1,0 +1,7 @@
+﻿version: '3.8'
+
+services:
+  app:
+    image: basket
+    ports:
+      - 5005:80

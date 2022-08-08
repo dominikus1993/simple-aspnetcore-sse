@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D10F1352-C6A7-4ABF-82C2-FC8E0AF6E24C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibCounter", "src\FibCounter\FibCounter.csproj", "{7C846046-907D-4DF8-AD83-845A2FD97BD5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C846046-907D-4DF8-AD83-845A2FD97BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C846046-907D-4DF8-AD83-845A2FD97BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C846046-907D-4DF8-AD83-845A2FD97BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C846046-907D-4DF8-AD83-845A2FD97BD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7C846046-907D-4DF8-AD83-845A2FD97BD5} = {D10F1352-C6A7-4ABF-82C2-FC8E0AF6E24C}
+	EndGlobalSection
+EndGlobal
