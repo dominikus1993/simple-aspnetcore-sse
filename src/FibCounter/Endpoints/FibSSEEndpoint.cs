@@ -15,10 +15,10 @@ public sealed class FibSSEEndpoint : EndpointWithoutRequest
     public override async Task HandleAsync(CancellationToken ct)
     {
         //simply provide any IAsyncEnumerable<T> as argument
-        await SendEventStreamAsync("my-event", GetDataStream(ct), ct);
+        await SendEventStreamAsync<FibResponse>("my-event", GetDataStream(ct), ct);
     }
 
-    private static async IAsyncEnumerable<object> GetDataStream(
+    private static async IAsyncEnumerable<FibResponse> GetDataStream(
         [EnumeratorCancellation] CancellationToken cancellation)
     {
         long counter = 0;
