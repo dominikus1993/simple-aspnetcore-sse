@@ -1,7 +1,7 @@
 using System.Net.WebSockets;
 using System.Text.Json;
-using FibCounter.Services;
-using Lib.AspNetCore.ServerSentEvents;
+using FastEndpoints;
+using FibCounter.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddHostedService<FibBackgroundService>();
-builder.Services.AddServerSentEvents<IFibServerSentEvents, FibServerSentEvents>(options =>
-{
-    options.KeepaliveMode = ServerSentEventsKeepaliveMode.Always;
-    options.KeepaliveInterval = 500;
-});
+builder.Services.AddFastEndpoints();
 
 var app = builder.Build();
 
@@ -24,7 +18,6 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.UseCors(b =>
@@ -34,15 +27,7 @@ app.UseCors(b =>
     b.AllowAnyOrigin();
 });
 app.UseAuthorization();
-app.MapServerSentEvents<FibServerSentEvents>("/sse", new ServerSentEventsOptions
-{
-    OnPrepareAccept = response =>
-    {
-        response.Headers.Append("Cache-Control", "no-cache");
-        response.Headers.Append("X-Accel-Buffering", "no");
-        response.Headers.ContentType = "text/event-stream; charset=utf-8";
-    }
-});
+app.UseFastEndpoints();
 var webSocketOptions = new WebSocketOptions
 {
     KeepAliveInterval = TimeSpan.FromMinutes(2),
