@@ -21,14 +21,33 @@ public sealed class FibSSEEndpoint : EndpointWithoutRequest
     private static async IAsyncEnumerable<FibResponse> GetDataStream(
         [EnumeratorCancellation] CancellationToken cancellation)
     {
-        long counter = 0;
+        int counter = 0;
         while (!cancellation.IsCancellationRequested)
         {
-            yield return new FibResponse(counter);
+            yield return new FibResponse(counter, Fib(counter));
             counter += 1;
             await Task.Delay(TimeSpan.FromSeconds(2), cancellation);
         }
     }
+
+    private static long Fib(int n)
+    {
+        if (n < 2)
+        {
+            return n;
+        }
+        var a = 0;
+        var b = 1;
+        
+        for (int i = 2; i <= n; i++)
+        {
+            var c = b + a;
+            a = b;
+            b = c;
+        }
+
+        return b;
+    }
 }
 
-internal record FibResponse(long Counter);
+internal readonly record struct FibResponse(long N, long Value);
